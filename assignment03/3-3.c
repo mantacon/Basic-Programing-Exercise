@@ -1,30 +1,36 @@
 #include<stdio.h>
-int squareAdd(int);
 
-int main(void){
+int getFactorial(int);
+
+int main(){
     int n=0;
-    for(int i=0;;i++){
-    printf("input number = ");
+    for(;;){
+    printf("input number =");
     scanf("%d",&n);
-    if(n<0) break;
-    printf("%d\n",squareAdd(n));
+    if(n<0||n>12){
+        printf("error!\n");
+    }   else if(n==0){
+            printf("1\n");
+        }   else{
+                printf("%d\n",getFactorial(n));    
+            }
     }
     return 0;
 }
 
-int squareAdd(int n){
+int getFactorial(int n){
     static int lastN=0;
-    static int sum=0;
-    if(n==lastN){
-        printf("Return cache date\n");
-        return sum;
+    static int y=1;
+    if (n==lastN){
+        printf("Return cache data\n");
+        return y;
     }else{
-        sum=0;
-        for(int i=1;i<=n;i++){
-            sum+=i*i;
-        }
         lastN=n;
-        return sum;
+        y=1;
+        for(int i=1;i<=n;i++){
+            y*= i;
+        }
+        return y;
     }
 }
 
