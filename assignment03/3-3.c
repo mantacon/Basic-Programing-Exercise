@@ -9,6 +9,7 @@ int main(){
     scanf("%d",&n);
     if(n<0||n>12){
         printf("error!\n");
+        break;
     }   else if(n==0){
             printf("1\n");
         }   else{
