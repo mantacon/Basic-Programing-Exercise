@@ -22,9 +22,6 @@ int wordCopy2(char *a, char *b){
     if (b == NULL) {
         b = p;
     }
-    if (b == NULL || *b == '\0') {
-        return 0; 
-    }
     for(i = 0; b[i] == ' ' || b[i] == '\n'; i++);//スペースをスキップ
     if (b[i] == '\0') {
         return 0;
