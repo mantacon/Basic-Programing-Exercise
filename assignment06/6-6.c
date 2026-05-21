@@ -21,6 +21,6 @@ int main(void){
 void eraseChar(char *a, int x, int y){
     for(int i = x;; i++){
         a[i] = a[i + y];
-        if(a[i + x] == '\0') break;
+        if(a[i + y] == '\0') break;
     }
 }
