@@ -1,0 +1,11 @@
+In evolutionary multiobjective optimization, the indicator-based subset selection problem involves finding a subset of points that maximizes a given quality indicator.
+Local search is an effective approach for obtaining a high-quality subset in this problem.
+However, local search requires high computational cost, especially as the size of the point set and the number of objectives increase.
+To overcome this issue, this paper proposes a candidate list strategy for local search in the indicator-based subset selection problem.
+In the proposed strategy, each point in a given point set has a candidate list.
+During search, each point is only eligible to swap with unselected points in its associated candidate list.
+This restriction drastically reduces the number of swaps at each iteration of local search.
+We consider two types of candidate lists: nearest neighbor and random neighbor lists.
+This paper investigates the effectiveness of the proposed candidate list strategy on various Pareto fronts.
+The results show that the proposed strategy with the nearest neighbor list can drastically speed up local search on continuous Pareto fronts without significantly compromising the subset quality.
+The results also show that sequentially using the two lists can address the discontinuity of Pareto fronts. 

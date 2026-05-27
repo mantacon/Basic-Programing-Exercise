@@ -1,0 +1,14 @@
+NAME: sample
+TYPE: TSP
+COMMENT: 6 locations in somewhere in this world
+DIMENSION: 6
+EDGE_WEIGHT_TYPE: ATT
+NODE_COORD_SECTION
+1 0.0 0.0
+2 1.0 5.0
+3 3.0 3.0
+4 5.0 4.0
+5 4.0 1.0
+6 3.0 2.0
+EOF
+
