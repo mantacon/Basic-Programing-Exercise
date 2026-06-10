@@ -29,7 +29,6 @@ int main(int argc, char *argv[]){
         printf("%s cannot open", argv[1]);
     exit(1);
     }
-    
 }
 
 void printout(struct student dt[], int n){
