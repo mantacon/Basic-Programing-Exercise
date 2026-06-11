@@ -146,12 +146,11 @@ int main(int argc, char* argv[]){
         used[i + 1] = start;
         sum2 += min;
     }
-    sum2 += dist_matrix[firstStart - 1][start - 1]; 
+    sum2 += dist_matrix[firstStart - 1][start - 1];
 
     printf("Optimal tour length = %d\n", sum);
     printf("Approximated tour length = %d\n", sum2);
     printf("Error = %lf%%", ((double)sum2 / (double)sum) * 100.0 - 100.0);
-
 
     free(opt_tour);
     for(int i = 0; i < demension; i++){
