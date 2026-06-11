@@ -14,20 +14,23 @@ void quicksort(struct student dt[], int left, int right);
 int main(int argc, char *argv[]){
     struct student dt[3000];
     FILE *fp;
-
+    int n = 0;
     if((fp = fopen(argv[1], "r")) != NULL){
-        int n = 0;
         while(fscanf(fp, "%d %s %d", &dt[n].num, dt[n].name, &dt[n].score) != EOF){
             n++;
         }
-        printout(dt, n);
         quicksort(dt, 0, n - 1);
-        printf("************************\n");
-        printout(dt, n);
         fclose(fp);
     }else{
         printf("%s cannot open", argv[1]);
     exit(1);
+    }
+    if((fp = fopen(argv[2], "w")) != NULL){
+        for(int i = 0; i < n; i++) fprintf(fp, "%d, %s, %d\n", dt[i].num, dt[i].name, dt[i].score);
+        fclose(fp);
+    }else{
+        printf("%s cannot open", argv[2]);
+        exit(1);
     }
 }
 
