@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
         quicksort(dt, 0, n - 1, &change);
         printf("************************\n");
         printout(dt, n);
-        printf("”äŠr‰ñ”:%d “ü‚ê‘Ö‚¦‰ñ”:%d", n * (int)log(n), change);
+        printf("”äŠr‰ñ”:%d “ü‚ê‘Ö‚¦‰ñ”:%d", (n) * (int)log2(n), change);
         fclose(fp);
     }else{
         printf("%s cannot open", argv[1]);

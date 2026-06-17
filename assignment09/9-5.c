@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<math.h>
 
 struct student{
     int num;
@@ -9,11 +10,12 @@ struct student{
 
 void printout(struct student dt[], int n);
 
-void quicksort(struct student dt[], int left, int right);
+void mergeSort(struct student dt[], int num, int *count);
 
 int main(int argc, char *argv[]){
     struct student dt[3000];
     FILE *fp;
+    int count = 0;
 
     if((fp = fopen(argv[1], "r")) != NULL){
         int n = 0;
@@ -21,9 +23,10 @@ int main(int argc, char *argv[]){
             n++;
         }
         printout(dt, n);
-        quicksort(dt, 0, n - 1);
+        mergeSort(dt, n, &count);
         printf("************************\n");
         printout(dt, n);
+        printf("比較回数%d, 入れ替え回数%d",n * (int)log2(n),  count);
         fclose(fp);
     }else{
         printf("%s cannot open", argv[1]);
@@ -37,32 +40,93 @@ void printout(struct student dt[], int n){
     }
 }
 
-void quicksort(struct student a[], int left, int right){
-    int pivot; // 基準値用変数
-    int i, j;        // 配列内の位置
-    struct student temp;
+void mergeSort(struct student a[], int n, int *count)
+{
+    struct student dt[2][2][3000];
+    int num[2][2];
+    int in, out, indx;
+    int i, j, k, p, q, r;
 
-    if(left < right){
-        i = left; j = right;
-        pivot = a[(left + right) / 2].score; // 配列の真ん中の要素を基準値とする．
-        do{
-            while(a[i].score > pivot)
-                /* 基準値以上の値を持つa[]の添字を先頭から順に探す */
-                i++;
-            while(pivot > a[j].score)
-                /* 基準値以下の値を持つa[]の添字を先頭から順に探す */
-                j--;
-            if(i <= j){
-                if(i < j){
-                    /* 交換すべき状態ならa[i]とa[j]の内容を交換する */
-                    temp = a[i]; a[i] = a[j]; a[j] = temp;
+    in = 0;
+    out = !in;
+
+    for (i = 0; i < n / 2; i++)
+        dt[in][0][i] = a[i];
+        (*count)++;
+    for (j = 0; i < n; i++, j++)
+        dt[in][1][j] = a[i];
+        (*count)++;
+    num[in][0] = n / 2;
+    num[in][1] = n - n / 2;
+    num[out][0] = 0;
+    num[out][1] = 0;
+
+    p = 1;
+
+    do {
+        i = 0;
+        j = 0;
+        indx = 0;
+
+        do {
+            if (num[in][0] >= p)
+                q = p;
+            else
+                q = num[in][0];
+            num[in][0] -= q;
+
+            if (num[in][1] >= p)
+                r = p;
+            else
+                r = num[in][1];
+            num[in][1] -= r;
+
+            k = num[out][indx];
+
+            while (q != 0 && r != 0) {
+                if (dt[in][0][i].score > dt[in][1][j].score) {
+                    dt[out][indx][k] = dt[in][0][i];
+                    i++;
+                    q--;
                 }
-                i++;  j--;   /* 次の要素を調べるために添字を変化させる */
+                else {
+                    dt[out][indx][k] = dt[in][1][j];
+                    j++;
+                    r--;
+                }
+                k++;
+                (*count)++;
             }
-        } while(i <= j);        /* 調べる要素が残っている時には続ける */
-        if(left < j)
-            quicksort(a, left, j);  /* 基準値以下の項目が入っている範囲で再帰実行 */
-        if(i < right)
-            quicksort(a, i, right); /* 基準値以上の項目が入っている範囲で再帰実行 */
+
+            while (q != 0) {
+                dt[out][indx][k] = dt[in][0][i];
+                i++;
+                q--;
+                k++;
+                (*count)++;
+            }
+
+            while (r != 0) {
+                dt[out][indx][k] = dt[in][1][j];
+                j++;
+                r--;
+                k++;
+                (*count)++;
+            }
+
+            num[out][indx] = k;
+            indx = !indx;
+
+        } while (num[in][0] > 0 || num[in][1] > 0);
+
+        out = in;
+        in = !in;
+
+        p = p * 2;
+
+    } while (p < n);
+
+    for (i = 0; i < n; i++) {
+        a[i] = dt[!out][!indx][i];
     }
 }
