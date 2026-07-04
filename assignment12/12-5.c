@@ -3,14 +3,6 @@
 #include<math.h>
 #include<time.h>
 
-/*
--最近近傍法の解をbestとしてバックトラック総当たりの探索関数getAns
--現在までの合計＞bestだったら強制打ち切り
--best = 10000で課題の条件１がない場合
--getAnsの引数にmodeとか入れて、枝刈をするかしないかをコマンドラインから指定したい
--clockでじかんをはかって比較しよう！３つを比較する感じですね
--*/
-
 int euclidean_distance(double point1[], double point2[]) {
   double xd = point1[0] - point2[0];
   double yd = point1[1] - point2[1];
